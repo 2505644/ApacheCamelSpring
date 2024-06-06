@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" shutdownHook="disable">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} %-5p %c{1}:%L - %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+        <RollingFile name="RollingFile" fileName="main.log"
+                     filePattern="$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} %-5p %c{1}:%L - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" level="info"/>
+            <AppenderRef ref="RollingFile" level="error"/>
+        </Root>
+    </Loggers>
+</Configuration>
